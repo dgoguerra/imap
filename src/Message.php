@@ -289,6 +289,18 @@ class Message extends Message\Part
     }
 
     /**
+     * Mark message as read
+     *
+     * @return Status
+     */
+    public function setRead()
+    {
+        $status = imap_setflag_full($this->stream, $this->messageNumber, "\\Seen \\Flagged", \ST_UID);
+
+        return $status;
+    }
+
+    /**
      * Prevent the message from being marked as seen
      *
      * Defaults to false, so messages that are read will be marked as seen.
